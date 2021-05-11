@@ -4,7 +4,7 @@
 </head>
 <body>
 
-    <div class="center verticallyCenter">
+    <div class="center">
         <h1>Cui cui ! Vous vous êtes sûrement perdu !</h1>
         <img id="bird" src="{{ asset('assets/images/bird.png') }}">
     </div>
