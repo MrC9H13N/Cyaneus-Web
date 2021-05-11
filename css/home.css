@@ -1,6 +1,11 @@
-#bird {
+#birdBig {
     height: 15vw;
 }
+
+#birdSmall {
+    height: 2.8vw;
+}
+
 
 h1 {
     font-size: 3vw;
@@ -10,10 +15,8 @@ h1 {
     color:white;
 }
 
-#connexion{
+#connexion, #creation{
     display: none;
-}
-
-#creation{
-    display: none;
+    margin: 12vw auto 0;
+    width: 40vw;
 }

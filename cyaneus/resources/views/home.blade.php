@@ -7,7 +7,7 @@
 
     <div id="title">
         <div  class="center my-5">
-            <img id="bird" src="{{ asset('assets/images/bird.png') }}">
+            <img id="birdBig" src="{{ asset('assets/images/bird.png') }}">
             <h1>Cyaneus</h1>
         </div>
         <br><br><br>
@@ -18,27 +18,40 @@
         <button class="btn btn-primary" id="create" type="button"><i class="bi bi-pencil"></i> Créer un compte</button>
     </div>
 
-    <div id="connexion" class="bg-primary p-5 m-5">
-        <form>
+    <div id="connexion"  class="col-md-4 col-md-offset-4">
+        <form name="connexion">
+            <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Connexion</legend>
+            <hr/>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="mailConnect" class="form-label">Adresse mail</label>
+                <input type="email" class="form-control" id="mailConnect">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <label for="passwordConnect" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="passwordConnect">
+            </div><br>
+            <button type="submit" class="btn btn-primary"><strong>Se connecter</strong></button>
         </form>
     </div>
 
-    <div id="creation">
-        <h1>Création</h1>
+    <div id="creation"  class="col-md-4 col-md-offset-4">
+        <form name="creation">
+            <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Créer un compte</legend>
+            <hr/>
+            <div class="mb-3">
+                <label for="mail" class="form-label">Adresse mail</label>
+                <input type="email" class="form-control" id="mailCreation">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="passwordCreation">
+            </div>
+            <div class="mb-3">
+                <label for="passwordConfirm" class="form-label">Confirmation du mot de passe</label>
+                <input type="password" class="form-control" id="passwordConfirmCreation">
+            </div><br>
+            <button type="submit" class="btn btn-primary"><strong>Créer mon compte Cyaneus</strong></button>
+        </form>
     </div>
 
 </body>
