@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="552a8943-1d65-4d30-b5dc-7cfe26e2b253" name="Chronos.red" url="http://cyaneus.chronos.red/">
+        <fileTransfer rootFolder="/cyaneus.chronos.red" host="ftp.chronos.red" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
