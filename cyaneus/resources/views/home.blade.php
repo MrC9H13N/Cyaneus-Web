@@ -22,15 +22,16 @@
         <form name="connexion">
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Connexion</legend>
             <hr/>
-            <div class="mb-3">
-                <label for="mailConnect" class="form-label">Adresse mail</label>
-                <input type="email" class="form-control" id="mailConnect">
+            <label for="mailConnect"class="form-label">Adresse mail</label><br><br>
+            <div id="divAddon" class="input-group mb-3">
+                <input type="text" class="form-control" id="mailConnect" aria-describedby="addonConnect">
+                <span class="input-group-text" id="addonConnect">@student.junia.com</span>
             </div>
             <div class="mb-3">
                 <label for="passwordConnect" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="passwordConnect">
             </div><br>
-            <button type="submit" class="btn btn-primary"><strong>Se connecter</strong></button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-person-circle"></i> <strong>Se connecter</strong></button>
         </form>
     </div>
 
@@ -50,7 +51,7 @@
                 <label for="passwordConfirm" class="form-label">Confirmation du mot de passe</label>
                 <input type="password" class="form-control" id="passwordConfirmCreation">
             </div><br>
-            <button type="submit" class="btn btn-primary"><strong>Créer mon compte Cyaneus</strong></button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil"></i> <strong>Créer mon compte Cyaneus</strong></button>
         </form>
     </div>
 

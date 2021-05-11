@@ -1,0 +1,25 @@
+#calendar {
+    margin: 3vw;
+}
+
+.fc-day-past.fc-col-header-cell, .fc-day-future.fc-col-header-cell {
+    background-color: #6c737e;
+}
+
+.fc-day-today {
+background-color: #36596a !important;
+}
+
+
+.fc-col-header-cell-cushion {
+    text-decoration: none !important;
+    color:white;
+}
+
+.fc-day-today {
+    background-color: #36596a;
+}
+
+.fc-timegrid-event {
+    margin-right: -0.25vw;
+}
