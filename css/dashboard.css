@@ -1,0 +1,15 @@
+#bingLogo {
+    display: none !important;
+}
+
+.NavBar_MapTypeButtonContainerWrapper {
+    display: none !important;
+}
+
+.dirLeg, .dirDisclaimer {
+    display: none !important;
+}
+
+.directionsPanel{
+    background-color: white;
+}

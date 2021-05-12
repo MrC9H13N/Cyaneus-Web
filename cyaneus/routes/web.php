@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/agenda', function () {
     return view('agenda');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('/settings', function () {
+    return view('settings');
+});

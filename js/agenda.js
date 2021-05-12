@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         height: "40vw",
         eventDisplay:"block",
         slotMinTime:"08:00:00",
+        slotMaxTime:"20:00:00",
         displayEventTime: true,
         events: [
             { // this object will be "parsed" into an Event Object
