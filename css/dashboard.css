@@ -15,8 +15,26 @@
 }
 
 #myMap{
-    position:relative;
-    width:600px;
-    height:400px;
+    width: 100%;
+    height: 500px;
 }
 
+.card {
+    color: black;
+    background-color: #f4f4f4;
+    border: 5px solid #212529 !important;
+}
+
+#printoutPanel{
+    width: 100%;
+    height: 140px;
+}
+
+#note{
+    font-size: 6vw;
+    font-weight: bold;
+}
+
+#date {
+    font-style: italic;
+}

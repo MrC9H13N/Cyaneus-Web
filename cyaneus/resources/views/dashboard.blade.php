@@ -13,39 +13,35 @@
 </head>
 <body>
 @include('navbar')
-    <h1>Dashboard</h1>
-
-
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-xl-3 g-4 m-3">
         <div class="col">
-            <div class="card">
+            <div class="card border">
+                <div class="card-header">Trajet Domicile-Ecole</div>
                 <div class="card-body">
                     <div id="myMap"></div>
-                    <div id='printoutPanel'></div>
+                    <center><div id='printoutPanel'></div></center>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <div class="card-header">Dernière note</div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h1 id="note" class="center">17</h1>
+                    <h5 id="matiere" class="center">Electronique numérique</h5>
+                    <h5 id="date" class="center">02/05/2021</h5>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <div class="card-header">Prochain cours</div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
+                    </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
