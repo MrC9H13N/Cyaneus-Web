@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    //FullCalendar library - https://fullcalendar.io/
     let calendarEl = document.getElementById('calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
@@ -10,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
         slotMaxTime:"20:00:00",
         displayEventTime: true,
         events: [
-            { // this object will be "parsed" into an Event Object
-                title: 'Révisions d\'infographie', // a property!
-                start: '2021-05-12 09:30', // a property!
-                end: '2021-05-12 10:30', // a property! ** see important note below about 'end' **
+            {
+                title: 'Révisions d\'infographie',
+                start: '2021-05-12 09:30',
+                end: '2021-05-12 10:30',
             },
 
         ],

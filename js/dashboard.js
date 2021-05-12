@@ -1,3 +1,4 @@
+//API Bings Map - https://www.bingmapsportal.com/
 function GetMap()
 {
     var map = new Microsoft.Maps.Map('#myMap');
@@ -20,6 +21,4 @@ function GetMap()
         directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
         directionsManager.calculateDirections();
     });
-
-    //Add your post map load code here.
 }

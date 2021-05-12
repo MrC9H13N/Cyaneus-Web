@@ -13,3 +13,10 @@
 .directionsPanel{
     background-color: white;
 }
+
+#myMap{
+    position:relative;
+    width:600px;
+    height:400px;
+}
+
