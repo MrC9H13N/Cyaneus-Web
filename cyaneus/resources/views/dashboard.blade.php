@@ -14,7 +14,7 @@
 <body>
 @include('navbar')
     <div class="alert alert-info alert-dismissible fade show mx-4 mt-4" role="alert">
-        <strong>Bievenue !</strong> Voici la version 1.0 de Cyaneus.
+        <strong>Bievenue !</strong> Voici la version 0.1 de Cyaneus.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="row row-cols-1 row-cols-xl-3 g-4 m-3">
@@ -36,19 +36,27 @@
                     <h5 id="date" class="center">02/05/2021</h5>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header">Météo</div>
+                <div class="card-body row">
+                    <center><img id="iconMeteo" src=""></center>
+                    <h1 id="temp" class="center"></h1>
+                </div>
+            </div>
         </div>
         <div class="col">
             <div class="card">
                 <div class="card-header">Prochain cours</div>
                 <div class="card-body">
-                    </div>
+                    <h1 id="cours" class="center">Pentesting</h1>
+                    <h5 id="prof" class="center">Gabriel Chênevert - B802</h5>
+                </div>
             </div>
-        </div>
-        <div class="col">
             <div class="card">
+                <div class="card-header">Blague du jour</div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h5 id="blague" class="center"></h5>
+                    <h5 id="reponse" class="center"></h5>
                 </div>
             </div>
         </div>

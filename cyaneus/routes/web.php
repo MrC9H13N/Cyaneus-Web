@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::post('/', function () {
+    return view('home');
+});
+
 Route::get('/agenda', function () {
     return view('agenda');
 });

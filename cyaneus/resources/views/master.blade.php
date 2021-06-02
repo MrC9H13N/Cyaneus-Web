@@ -8,6 +8,7 @@
     <meta property="og:image" content="https://www.cyaneus.chronos.red/assets/images/bird.png" />
     <meta property="og:description" content="Cyaneus — Aurion en 10x mieux" />
     <meta property="og:site_name" content="Cyaneus" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

@@ -1,4 +1,6 @@
 //API Bings Map - https://www.bingmapsportal.com/
+let jokesToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjE0Mzk2MDUyMDg0NzUyMzg1IiwibGltaXQiOjEwMCwia2V5IjoicnozWURBN2ZMSEdYVFBrSVpGbHY2Y1YyMUlSdGFFeFJ6VUlaeTM0SUVXdjdMcTdVZWYiLCJjcmVhdGVkX2F0IjoiMjAyMS0wNS0yM1QwODoyMTozOSswMDowMCIsImlhdCI6MTYyMTc1ODA5OX0.IyBA-DfzaX3gLkqEmn7IfTZhG_5XJliNDFAU0Wr0RNQ";
+
 function GetMap()
 {
     var map = new Microsoft.Maps.Map('#myMap');
@@ -59,6 +61,42 @@ function getBgColor(note) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    //On envoie la requête pour la météo
+    let date = new Date();
+    date = date.toISOString().slice(0, 10)+("0" + date.getHours()).slice(-2);
+    date = date.replaceAll("-", "");
+    let link = 'https://api.meteo-npdc.fr/prville/getGlobal.php?ville=Lille&time='+date
+    console.log(link);
+    fetch(link)
+        .then(res => res.json())
+        .then((out) => {
+            document.getElementById("temp").innerHTML = Math.round(out.TMP)+"°C";
+            document.getElementById("iconMeteo").src="https://meteo-npdc.fr/previ-ville/picto/"+out.test+".png";
+            console.log(out);
+        }).catch(err => console.error(err));
+
+    //On change la couleur de la note
     document.getElementById("note").style.color = getBgColor(document.getElementById("note").innerHTML);
+
+    //API Blague
+    fetch('https://www.blagues-api.fr/api/type/global/random', {
+        headers: {
+            'Authorization': 'Bearer '+ jokesToken
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.joke);
+            document.getElementById("blague").innerHTML = data.joke;
+            document.getElementById("reponse").innerHTML = data.answer;
+            /* Expected output:
+            {
+                "id": 1,
+                "type": "dev",
+                "joke": "Un développeur ne descend pas du métro.",
+                "answer": "Il libère la RAM..."
+            }
+            */
+        })
 });
 

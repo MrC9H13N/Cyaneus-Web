@@ -4,7 +4,6 @@
     <title>Accueil</title>
 </head>
 <body>
-
     <div id="title">
         <div  class="center my-5">
             <img id="birdBig" src="{{ asset('assets/images/bird.png') }}">
@@ -19,23 +18,25 @@
     </div>
 
     <div id="connexion"  class="col-md-4 col-md-offset-4">
-        <form name="connexion">
+        @csrf
+        <form name="connexion" method="post" action="">
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Connexion</legend>
             <hr/>
             <label for="mailConnect"class="form-label">Adresse mail</label><br><br>
             <div id="divAddon" class="input-group mb-3">
-                <input type="text" class="form-control" id="mailConnect" aria-describedby="addonConnect">
+                <input type="text" class="form-control" id="mailConnect" name="mailConnect" aria-describedby="addonConnect">
                 <span class="input-group-text" id="addonConnect">@student.junia.com</span>
             </div>
             <div class="mb-3">
                 <label for="passwordConnect" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="passwordConnect">
+                <input type="password" class="form-control" id="passwordConnect" name="passwordConnect">
             </div><br>
             <button type="submit" class="btn btn-primary"><i class="bi bi-person-circle"></i> <strong>Se connecter</strong></button>
         </form>
     </div>
 
     <div id="creation"  class="col-md-4 col-md-offset-4">
+        @csrf
         <form name="creation">
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Créer un compte</legend>
             <hr/>

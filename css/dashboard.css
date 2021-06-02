@@ -27,7 +27,7 @@
 
 #printoutPanel{
     width: 100%;
-    height: 140px;
+    height: 100%;
 }
 
 #note{
@@ -35,6 +35,15 @@
     font-weight: bold;
 }
 
-#date {
+#temp{
+    font-size: 4vw;
+    font-weight: bold;
+}
+
+#iconMeteo {
+    height: 6vw;
+}
+
+#date, #prof {
     font-style: italic;
 }
