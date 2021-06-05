@@ -18,8 +18,9 @@
     </div>
 
     <div id="connexion"  class="col-md-4 col-md-offset-4">
-        @csrf
-        <form name="connexion" method="post" action="">
+
+        <form name="connexion" method="post" action="{{url('/login')}}">
+            @csrf
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Connexion</legend>
             <hr/>
             <label for="mailConnect"class="form-label">Adresse mail</label><br><br>
@@ -36,8 +37,8 @@
     </div>
 
     <div id="creation"  class="col-md-4 col-md-offset-4">
-        @csrf
-        <form name="creation">
+        <form name="creation" method="post" action="{{url('/create')}}>
+            @csrf
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Créer un compte</legend>
             <hr/>
             <div class="mb-3">

@@ -55,8 +55,8 @@
             <div class="card">
                 <div class="card-header">Blague du jour</div>
                 <div class="card-body">
-                    <h5 id="blague" class="center"></h5>
-                    <h5 id="reponse" class="center"></h5>
+                    <h5 id="blagueTEMP" class="center">Quelles sont les deux sœurs qui ont la meilleure vue ?</h5>
+                    <h5 id="reponseTEMP" class="center">Les sœurs jumelles.</h5>
                 </div>
             </div>
         </div>
