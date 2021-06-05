@@ -37,7 +37,7 @@
     </div>
 
     <div id="creation"  class="col-md-4 col-md-offset-4">
-        <form name="creation" method="post" action="{{url('/create')}}>
+        <form name="creation" method="post" action="{{url('/create')}}">
             @csrf
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Créer un compte</legend>
             <hr/>
