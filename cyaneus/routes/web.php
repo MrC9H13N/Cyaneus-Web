@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 Route::post('/login',[UserController::class, 'login']);
 Route::post('/create',[UserController::class, 'create']);
+Route::post('/logout',[UserController::class, 'logout']);
 
 Route::get('/agenda', function () {
     return view('agenda');

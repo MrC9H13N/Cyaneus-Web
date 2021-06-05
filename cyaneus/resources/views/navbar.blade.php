@@ -21,6 +21,11 @@
                     <a class="nav-link" href="/settings"><i class="bi bi-gear"></i> Paramètres</a>
                 </li>
             </ul>
+
         </div>
+        <form class="form-inline my-2 my-lg-0" name="logout" method="post" action="{{url('/logout')}}">
+            @csrf
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="bi bi-arrow-bar-left"></i> Déconnexion</button>
+        </form>
     </div>
 </nav>
