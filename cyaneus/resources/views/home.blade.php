@@ -14,11 +14,24 @@
             <h1>Cyaneus</h1>
         </div>
         <br><br><br>
+
     </div>
 
     <div id="boutons" class="d-grid gap-3 col-4 mx-auto">
         <button class="btn btn-outline-primary" id="connect" type="button"> <i class="bi bi-person-circle"></i> Se connecter</button>
         <button class="btn btn-primary" id="create" type="button"><i class="bi bi-pencil"></i> Créer un compte</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="https://play.google.com/store/apps/details?id=red.chronos.cyaneus">
+                        <img id="playstore" src="{{ asset('assets/images/download_playstore.png') }}">
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <img id="appstore" src="{{ asset('assets/images/app_store_coming_soon.png') }}">
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="connexion"  class="col-md-4 col-md-offset-4">

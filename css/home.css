@@ -28,3 +28,13 @@ h1 {
 #divAddon{
     margin-top: -1.5vw;
 }
+
+#playstore {
+    height: 5vw;
+}
+
+#appstore {
+    margin-top: 0.8vw;
+    margin-left: 9vw;
+    height: 3.6vw;
+}

@@ -61,7 +61,7 @@ class UserController extends Controller
             'prenom' => $prenom,
             'pass' => Hash::make($pass)
         ]);
-
+        session(['user' => $prenom]);
         return redirect('dashboard');
     }
 

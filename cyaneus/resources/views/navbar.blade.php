@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/settings"><i class="bi bi-gear"></i> Paramètres</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact"><i class="bi bi-envelope"></i> Contact</a>
+                </li>
             </ul>
 
         </div>
