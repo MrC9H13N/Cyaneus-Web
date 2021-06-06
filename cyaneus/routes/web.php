@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('home');
 });
+
 Route::post('/login',[UserController::class, 'login']);
 Route::post('/create',[UserController::class, 'create']);
 Route::post('/logout',[UserController::class, 'logout']);

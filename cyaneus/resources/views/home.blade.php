@@ -63,6 +63,21 @@
             <button type="submit" class="btn btn-primary"><i class="bi bi-pencil"></i> <strong>Créer mon compte Cyaneus</strong></button>
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script> //Affichage des erreurs de connexion et de création de compte
+        document.addEventListener("DOMContentLoaded", function(){
+            var notyf = new Notyf({
+                duration:4000,
+                ripple:true,
+                dismissible:true,
+                position:{x:'right',y:'top'}
+            });
+            let err = "{!! $err ?? '' !!}";
+            console.log(err);
+            if(err === "invalidAccount") notyf.error('Utilisteur non enregistré dans la base de donnée');
+            if(err === "mailSyntax") notyf.error('Adresse mail incorrecte');
 
+        });
+    </script>
 </body>
 </html>

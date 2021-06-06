@@ -14,7 +14,7 @@
 <body>
 @include('navbar')
     <div class="alert alert-info alert-dismissible fade show mx-4 mt-4" role="alert">
-        <strong>Bievenue !</strong> Voici la version 0.1 de Cyaneus.
+        <strong>Bievenue @php echo session('user'); @endphp !</strong> Voici la version 0.1 de Cyaneus.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="row row-cols-1 row-cols-xl-3 g-4 m-3">

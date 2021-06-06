@@ -11,16 +11,31 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function login(Request $request){
-        echo $request;
-        //return redirect('dashboard');
-    }
-
-    public function create(Request $request){
-        //
         if(session()->exists('user')){ //Si déjà connecté on redirige vers dashboard
             return redirect('dashboard');
         }
-        //echo Hash::make("toktok");
+        $data = $request->all();
+        $mail = explode(".", $data['mailConnect']);
+        if(!isset($mail[0]) || !isset($mail[1])){ //Syntaxe du mail incorrecte
+            return view('/home', ['err' => 'mailSyntax']);
+        }
+        $prenom = ucfirst(strtolower($mail[0]));
+        $nom = ucfirst(strtolower($mail[1]));
+        $pass = $data['passwordConnect'];
+        $users = DB::table('users')->get();
+        foreach ($users as $u) {
+            if($u->nom == $nom && $u->prenom == $prenom && Hash::check($pass, $u->pass)){ //User connecté
+                session(['user' => $prenom]);
+                return redirect('dashboard');
+            }
+        }
+        return view('/home', ['err' => 'invalidAccount']);
+    }
+
+    public function create(Request $request){
+        if(session()->exists('user')){ //Si déjà connecté on redirige vers dashboard
+            return redirect('dashboard');
+        }
         $data = $request->all();
         $mail = explode(".", $data['mailCreation']);
         if(!isset($mail[0]) || !isset($mail[1])){ //Syntaxe du mail incorrecte
@@ -30,18 +45,24 @@ class UserController extends Controller
         $nom = ucfirst(strtolower($mail[1]));
         $pass = $data['passwordCreation'];
         $passConfirm = $data['passwordConfirmCreation'];
-        if($pass != $passConfirm) { //Mauvaise confirmation du mot de passe
+        if($pass != $passConfirm){ //Confirmation du mot de passe incorecte
             return redirect('/');
         }
+
         $users = DB::table('users')->get();
         foreach ($users as $u) {
-            if($u->nom == $nom && $u->prenom == $prenom && Hash::check($passConfirm, $u->pass)){ //User connecté
-                session(['user' => $prenom]);
-                return redirect('dashboard');
-            } else {
+            if($u->nom == $nom && $u->prenom == $prenom){ //User déjà enregistré
+                return redirect('/');
             }
         }
-        return redirect('/'); //Mail ou mot de passe incorrect
+
+        DB::table('users')->insert([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'pass' => Hash::make($pass)
+        ]);
+
+        return redirect('dashboard');
     }
 
     public function logout(){

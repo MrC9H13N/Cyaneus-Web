@@ -61,6 +61,7 @@ function getBgColor(note) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
     //On envoie la requête pour la météo
     let date = new Date();
     date = date.toISOString().slice(0, 10)+("0" + date.getHours()).slice(-2);
@@ -99,4 +100,3 @@ document.addEventListener('DOMContentLoaded', function() {
             */
         })
 });
-
