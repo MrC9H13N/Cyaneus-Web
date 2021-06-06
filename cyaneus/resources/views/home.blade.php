@@ -76,6 +76,8 @@
             console.log(err);
             if(err === "invalidAccount") notyf.error('Utilisteur non enregistré dans la base de donnée');
             if(err === "mailSyntax") notyf.error('Adresse mail incorrecte');
+            if(err === "passConfirm") notyf.error('Confirmation du mot de passe incorrecte');
+            if(err === "userExisting") notyf.error('Vous avez déjà un compte');
 
         });
     </script>

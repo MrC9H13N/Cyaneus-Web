@@ -39,20 +39,20 @@ class UserController extends Controller
         $data = $request->all();
         $mail = explode(".", $data['mailCreation']);
         if(!isset($mail[0]) || !isset($mail[1])){ //Syntaxe du mail incorrecte
-            return redirect('/');
+            return view('/home', ['err' => 'mailSyntax']);
         }
         $prenom = ucfirst(strtolower($mail[0]));
         $nom = ucfirst(strtolower($mail[1]));
         $pass = $data['passwordCreation'];
         $passConfirm = $data['passwordConfirmCreation'];
         if($pass != $passConfirm){ //Confirmation du mot de passe incorecte
-            return redirect('/');
+            return view('/home', ['err' => 'passConfirm']);
         }
 
         $users = DB::table('users')->get();
         foreach ($users as $u) {
             if($u->nom == $nom && $u->prenom == $prenom){ //User déjà enregistré
-                return redirect('/');
+                return view('/home', ['err' => 'userExisting']);
             }
         }
 
