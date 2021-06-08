@@ -10,6 +10,30 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public static function v4() {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+
+            // 48 bits for "node"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
+
+
     public function login(Request $request){
         if(session()->exists('user')){ //Si déjà connecté on redirige vers dashboard
             return redirect('dashboard');
@@ -25,7 +49,8 @@ class UserController extends Controller
         $users = DB::table('users')->get();
         foreach ($users as $u) {
             if($u->nom == $nom && $u->prenom == $prenom && Hash::check($pass, $u->pass)){ //User connecté
-                session(['user' => $prenom]);
+                session(['userName' => $u->prenom]);
+                session(['userID' => $u->uuid]);
                 return redirect('dashboard');
             }
         }
@@ -37,6 +62,7 @@ class UserController extends Controller
             return redirect('dashboard');
         }
         $data = $request->all();
+        //$mailWhitoutA = substr($data['mailCreation'], 0, strpos($data['mailCreation'], "@"));
         $mail = explode(".", $data['mailCreation']);
         if(!isset($mail[0]) || !isset($mail[1])){ //Syntaxe du mail incorrecte
             return view('/home', ['err' => 'mailSyntax']);
@@ -55,13 +81,15 @@ class UserController extends Controller
                 return view('/home', ['err' => 'userExisting']);
             }
         }
-
+        $uuidV4 = self::v4();
         DB::table('users')->insert([
+            'uuid' => $uuidV4,
             'nom' => $nom,
             'prenom' => $prenom,
             'pass' => Hash::make($pass)
         ]);
-        session(['user' => $prenom]);
+        session(['userName' => $prenom]);
+        session(['userID' => $uuidV4]);
         return redirect('dashboard');
     }
 

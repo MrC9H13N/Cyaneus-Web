@@ -6,3 +6,12 @@
     left: 10%;
     margin-top: 2vw;
 }
+
+.card, .card-text, .card-title{
+    color:white !important;
+    background-color: #565e6c;
+}
+
+label {
+    color:white !important;
+}

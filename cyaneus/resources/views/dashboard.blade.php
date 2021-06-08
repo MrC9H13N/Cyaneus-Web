@@ -74,7 +74,7 @@
     });
     notyf.open({
         type: 'info',
-        message: '<b>Bievenue @php echo session('user'); @endphp !</b> Voici la version 0.1 de Cyaneus.'
+        message: '<b>Bievenue @php echo session('userName'); @endphp !</b> Voici la version 0.1 de Cyaneus.'
     });
 </script>
 </body>

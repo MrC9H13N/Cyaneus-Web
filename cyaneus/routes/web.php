@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingsController;
 
 
 /*
@@ -41,6 +42,8 @@ Route::get('/dashboard', function () {
 Route::get('/settings', function () {
     return view('settings');
 });
+
+Route::post('/changePassword',[SettingsController::class, 'changePassword']);
 
 Route::get('/contact', function () {
     return view('contact');
