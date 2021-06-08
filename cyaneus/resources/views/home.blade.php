@@ -35,7 +35,6 @@
     </div>
 
     <div id="connexion"  class="col-md-4 col-md-offset-4">
-
         <form name="connexion" method="post" action="{{url('/login')}}">
             @csrf
             <legend><img id="birdSmall" class="mx-3" src="{{ asset('assets/images/bird.png') }}">Connexion</legend>
@@ -51,6 +50,10 @@
             </div><br>
             <button type="submit" class="btn btn-primary"><i class="bi bi-person-circle"></i> <strong>Se connecter</strong></button>
         </form>
+        <div id="ouContainer">ou</div>
+        <div id="facialContainer">
+            <button type="submit" class="btn btn-success" id="facialConnect"><i class="bi bi-camera"></i> <strong>Se connecter par reconaissance faciale</strong></button>
+        </div>
     </div>
 
     <div id="creation" class="col-md-4 col-md-offset-4">

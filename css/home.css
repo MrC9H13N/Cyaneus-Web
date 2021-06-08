@@ -38,3 +38,16 @@ h1 {
     margin-left: 9vw;
     height: 3.6vw;
 }
+
+#ou {
+    width:20vw;
+    height:20vw;
+    font-size: 2vw;
+    line-height:20vw; /* centrage vertical */
+    text-align:center; /* centrage horizontal */
+}
+
+#ouContainer, #facialContainer {
+    margin-top: 2vw;
+    text-align: center;
+}

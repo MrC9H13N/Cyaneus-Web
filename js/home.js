@@ -27,4 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
         document.getElementById("creation").style.display = "block";
         main = false;
     };
+    document.getElementById("facialConnect").onclick = function(){
+        alert("Reconaissance faciale");
+    };
 });

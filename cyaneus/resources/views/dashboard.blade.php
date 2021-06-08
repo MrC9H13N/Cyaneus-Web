@@ -13,10 +13,6 @@
 </head>
 <body>
 @include('navbar')
-    <div class="alert alert-info alert-dismissible fade show mx-4 mt-4" role="alert">
-        <strong>Bievenue @php echo session('user'); @endphp !</strong> Voici la version 0.1 de Cyaneus.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
     <div class="row row-cols-1 row-cols-xl-3 g-4 m-3">
         <div class="col">
             <div class="card border">
@@ -61,5 +57,25 @@
             </div>
         </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script>
+    var notyf = new Notyf({
+        duration:10000,
+        ripple:true,
+        dismissible:true,
+        position:{x:'center',y:'bottom'},
+        types: [
+            {
+                type: 'info',
+                background: '#6ca4bc',
+                icon: false
+            }
+        ]
+    });
+    notyf.open({
+        type: 'info',
+        message: '<b>Bievenue @php echo session('user'); @endphp !</b> Voici la version 0.1 de Cyaneus.'
+    });
+</script>
 </body>
 </html>
