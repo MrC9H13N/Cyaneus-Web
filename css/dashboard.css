@@ -33,6 +33,7 @@
 #note{
     font-size: 6vw;
     font-weight: bold;
+    /*filter: blur(1.5vw);*/
 }
 
 #temp{

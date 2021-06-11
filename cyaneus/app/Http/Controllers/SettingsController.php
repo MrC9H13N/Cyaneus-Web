@@ -13,9 +13,15 @@ class SettingsController extends Controller
     public function changePassword(Request $request){
         $data = $request->all();
         if($data['newPassword'] != $data['newPasswordConfirm']){
-            return view('/settings', ['err' => 'passDiff']);
+            return view('/settings', ['code' => 'passDiff']);
         }
         DB::table('users')->where('uuid', session('userID'))->update(['pass' => Hash::make($data['newPassword'])]);
         return view('/settings', ['code' => 'passOK']);
+    }
+
+    public function changeAdress(Request $request){
+        $data = $request->all();
+        DB::table('users')->where('uuid', session('userID'))->update(['adresse' => $data['coord']]);
+        return view('/settings', ['code' => 'adressOK']);
     }
 }

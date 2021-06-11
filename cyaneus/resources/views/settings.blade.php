@@ -1,8 +1,16 @@
 @include('master')
+    <script>
+        //Valeurs à afficher en fonction de la BDD
+        let adresse = "@php echo DB::table('users')->where('uuid', session('userID'))->value('adresse'); @endphp";
+    </script>
     <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
     <script src="{{ asset('js/settings.js') }}"></script>
 
     <title>Paramètres</title>
+    <script src="https://cdn.jsdelivr.net/gh/bigdatacloudapi/js-reverse-geocode-client@latest/bigdatacloud_reverse_geocode.min.js" type="text/javascript"></script>
+    <script type='text/javascript'
+        src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Arj8WiNOGG2FaV4XLSxy7GHXhOTN8hXURwFNOdnXtwBhWmGu5xo_0ssZmWzZImHO'
+        async defer></script>
     </head>
 <body>
 @include('navbar')
@@ -50,33 +58,60 @@
         </div>
         <div class="col">
             <div class="card border-dark">
-                <div class="card-header">Header</div>
+                <div class="card-header">Localisation</div>
                 <div class="card-body text-dark">
-                    <h5 class="card-title">Dark card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">
+                    <form name="changeAdress whiteFormText" method="post" action="{{url('/changeAdress')}}">
+                        @csrf
+                        <label for="coord" class="form-label">Coordonnées</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="coord" name="coord">
+                            <div class="input-group-append" id="loadingButton">
+                                <button class="btn btn-success" type="button" id="locate"><i class="bi bi-cursor"></i> Me localiser</button>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
+                    </form>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card border-dark">
-                <div class="card-header">Header</div>
+                <div class="card-header">Dashboard</div>
                 <div class="card-body text-dark">
-                    <h5 class="card-title">Dark card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la dernière note</label>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card border-dark">
-                <div class="card-header">Header</div>
-                <div class="card-body text-dark">
-                    <h5 class="card-title">Dark card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="card-header">Reconaissance faciale</div>
+                <div class="card-body text-dark" id="facialContainer">
+                    <button type="submit" class="btn btn-success" id="facialParam"><i class="bi bi-camera"></i> <strong>Paramétrer la reconaissance faciale</strong></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script> //Affichage des erreurs de connexion et de création de compte
+    document.addEventListener("DOMContentLoaded", function(){
+        var notyf = new Notyf({
+            duration:4000,
+            ripple:true,
+            dismissible:true,
+            position:{x:'right',y:'top'}
+        });
+        let err = "{!! $code ?? '' !!}";
+        if(err === "passOK") notyf.success('Changement de mot passe réussi');
+        if(err === "adressOK") notyf.success('Changement d\'adresse réussi');
+        if(err === "passDiff") notyf.error('Mauvaise confirmation du mot de passe');
+    });
+</script>
 </body>
 </html>

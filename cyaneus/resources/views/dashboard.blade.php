@@ -1,8 +1,8 @@
 @include('master')
     <script>
         //Valeurs à modifier en fonction de la BDD
-        var home = [50.71253184448871, 2.7865271836187877];
-        var school = [50.63415509710043, 3.0487966239874265];
+        let home = "@php echo DB::table('users')->where('uuid', session('userID'))->value('adresse'); @endphp";
+        let school = [50.63415509710043, 3.0487966239874265];
     </script>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <script src="{{ asset('js/dashboard.js') }}"></script>

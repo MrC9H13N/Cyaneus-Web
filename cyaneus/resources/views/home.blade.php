@@ -1,4 +1,4 @@
-@if(session()->has('user'))
+@if(session()->has('userID'))
     <script>window.location = "/dashboard";</script>
 @endif
 

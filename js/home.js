@@ -31,3 +31,4 @@ document.addEventListener("DOMContentLoaded", function(){
         alert("Reconaissance faciale");
     };
 });
+window.history.replaceState("a", "Accueil", "/");

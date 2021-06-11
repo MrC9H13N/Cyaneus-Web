@@ -1,6 +1,6 @@
 @include('master')
 <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
-<script src="{{ asset('js/contact .js') }}"></script>
+<script src="{{ asset('js/contact.js') }}"></script>
 
 <title>Contact</title>
 </head>

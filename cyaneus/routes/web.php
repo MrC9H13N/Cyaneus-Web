@@ -44,7 +44,12 @@ Route::get('/settings', function () {
 });
 
 Route::post('/changePassword',[SettingsController::class, 'changePassword']);
+Route::post('/changeAdress',[SettingsController::class, 'changeAdress']);
 
 Route::get('/contact', function () {
     return view('contact');
+});
+
+Route::get('/frs', function () { //Facial recognition setup
+    return view('frs');
 });

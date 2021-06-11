@@ -1,6 +1,8 @@
 //API Bings Map - https://www.bingmapsportal.com/
 let jokesToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjE0Mzk2MDUyMDg0NzUyMzg1IiwibGltaXQiOjEwMCwia2V5IjoicnozWURBN2ZMSEdYVFBrSVpGbHY2Y1YyMUlSdGFFeFJ6VUlaeTM0SUVXdjdMcTdVZWYiLCJjcmVhdGVkX2F0IjoiMjAyMS0wNS0yM1QwODoyMTozOSswMDowMCIsImlhdCI6MTYyMTc1ODA5OX0.IyBA-DfzaX3gLkqEmn7IfTZhG_5XJliNDFAU0Wr0RNQ";
 
+
+
 function GetMap()
 {
     var map = new Microsoft.Maps.Map('#myMap');
@@ -13,16 +15,29 @@ function GetMap()
         disableBirdseye : true,
         disableStreetside: true,
     });
-    Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-        var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-        directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-        var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Domicile', location: new Microsoft.Maps.Location(home[0], home[1]) });
-        var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'ISEN Lille', location: new Microsoft.Maps.Location(school[0], school[1]) });
-        directionsManager.addWaypoint(waypoint1);
-        directionsManager.addWaypoint(waypoint2);
-        directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
-        directionsManager.calculateDirections();
+
+    Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+        var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+        var requestOptions = {
+            bounds: map.getBounds(),
+            where: home,
+            callback: function (answer) {
+                let result = new Microsoft.Maps.Pushpin(answer.results[0].location);
+                Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+                    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Domicile', location: new Microsoft.Maps.Location(result.geometry.y, result.geometry.x) });
+                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'ISEN Lille', location: new Microsoft.Maps.Location(school[0], school[1]) });
+                    directionsManager.addWaypoint(waypoint1);
+                    directionsManager.addWaypoint(waypoint2);
+                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                    directionsManager.calculateDirections();
+                });
+            }
+        };
+        searchManager.geocode(requestOptions);
     });
+
 }
 
 function getBgColor(note) {
@@ -79,24 +94,5 @@ document.addEventListener('DOMContentLoaded', function() {
     //On change la couleur de la note
     document.getElementById("note").style.color = getBgColor(document.getElementById("note").innerHTML);
 
-    //API Blague
-    fetch('https://www.blagues-api.fr/api/type/global/random', {
-        headers: {
-            'Authorization': 'Bearer '+ jokesToken
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.joke);
-            document.getElementById("blague").innerHTML = data.joke;
-            document.getElementById("reponse").innerHTML = data.answer;
-            /* Expected output:
-            {
-                "id": 1,
-                "type": "dev",
-                "joke": "Un développeur ne descend pas du métro.",
-                "answer": "Il libère la RAM..."
-            }
-            */
-        })
 });
+window.history.replaceState("a", "Dashboard", "/dashboard");

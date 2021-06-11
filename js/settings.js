@@ -13,3 +13,63 @@ function getCoorFromAdress(adress){
         searchManager.geocode(requestOptions);
     });
 }
+
+//Récupère l'adresse en fonction de la position GPS de l'utilisateur
+function getGeoData (){
+    document.getElementById("loadingButton").innerHTML = '<button class="btn btn-success" type="button" disabled>\n' +
+        '                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+        '                                    Chargement ...\n' +
+        '                                </button>';
+
+    if ("geolocation" in navigator) {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        };
+        async function success(pos){
+            console.log(pos.coords.accuracy);
+            console.log(pos.coords.latitude+"+"+pos.coords.longitude);
+
+            var request = new XMLHttpRequest();
+            request.open('GET', "https://api.opencagedata.com/geocode/v1/json?q="+pos.coords.latitude+"+"+pos.coords.longitude+"&key=086a43aba9c14210b56b9885e8063e3b", true);
+
+            request.onload = function() {
+                if (request.status >= 200 && request.status < 400) {
+                    var data = JSON.parse(request.responseText);
+                    displayResult(data.results[0].components);
+                } else {
+                    alert("Erreur");
+                }
+            };
+            request.onerror = function() {
+                alert("Erreur");
+            };
+            request.send();
+
+        }
+
+        function error(err){
+            alert("Géolocalisation impossible")
+        }
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+    } else {
+        alert("Géolocalisation impossible")
+    }
+}
+
+function displayResult(data){
+    document.getElementById("coord").value = data.house_number + " " + data.street + ", " + data.city;
+    document.getElementById("loadingButton").innerHTML = '<button class="btn btn-success" type="button" id="locate"><i class="bi bi-cursor"></i> Me localiser</button>';
+    document.getElementById("locate").addEventListener("click", getGeoData);
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("coord").value = adresse;
+    document.getElementById("locate").addEventListener("click", getGeoData);
+    document.getElementById("facialParam").addEventListener("click", function(){
+        window.location.href = "/frs";
+    });
+});
+window.history.replaceState("a", "Paramètres", "/settings");

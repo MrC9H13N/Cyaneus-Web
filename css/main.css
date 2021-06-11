@@ -29,3 +29,7 @@ body {
 .navbar-brand{
     padding-left:1vw;
 }
+
+.navbar{
+    z-index:10;
+}
