@@ -45,6 +45,7 @@ Route::get('/settings', function () {
 
 Route::post('/changePassword',[SettingsController::class, 'changePassword']);
 Route::post('/changeAdress',[SettingsController::class, 'changeAdress']);
+Route::post('/addUserPicture',[SettingsController::class, 'addUserPicture']);
 
 Route::get('/contact', function () {
     return view('contact');

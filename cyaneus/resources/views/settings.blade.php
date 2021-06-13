@@ -81,10 +81,29 @@
             <div class="card border-dark">
                 <div class="card-header">Dashboard</div>
                 <div class="card-body text-dark">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la dernière note</label>
-                    </div>
+                    <p class="card-text">
+                    <form name="changeParam whiteFormText" method="post" action="{{url('/changeParam')}}">
+                        @csrf
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="lastNote" name="lastNote" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la dernière note</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="path" name="path" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage du trajet domicile-école</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="weather" name="weather" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la météo</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="class" name="class" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage du prochain cours</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
+                    </form>
+                    </p>
                 </div>
             </div>
         </div>

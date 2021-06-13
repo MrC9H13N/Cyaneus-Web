@@ -24,4 +24,9 @@ class SettingsController extends Controller
         DB::table('users')->where('uuid', session('userID'))->update(['adresse' => $data['coord']]);
         return view('/settings', ['code' => 'adressOK']);
     }
+
+    public function addUserPicture(Request $request){
+        $data = $request->all();
+        print_r($data);
+    }
 }

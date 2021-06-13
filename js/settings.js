@@ -7,7 +7,7 @@ function getCoorFromAdress(adress){
             where: adress,
             callback: function (answer, userData) {
                 map.setView({ bounds: answer.results[0].bestView });
-                return([answer.results[0].location.latitude,answer.results[0].location.longitude])
+                return([answer.results[0].location.latitude,answer.results[0].location.longitude]);
             }
         };
         searchManager.geocode(requestOptions);
@@ -37,7 +37,10 @@ function getGeoData (){
             request.onload = function() {
                 if (request.status >= 200 && request.status < 400) {
                     var data = JSON.parse(request.responseText);
-                    displayResult(data.results[0].components);
+                    console.log("https://api.opencagedata.com/geocode/v1/json?q="+pos.coords.latitude+"+"+pos.coords.longitude+"&key=086a43aba9c14210b56b9885e8063e3b");
+                    displayResult(data.results[0].components, pos.coords.accuracy);
+                    console.log(data.results[0].components);
+
                 } else {
                     alert("Erreur");
                 }
@@ -59,8 +62,20 @@ function getGeoData (){
     }
 }
 
-function displayResult(data){
-    document.getElementById("coord").value = data.house_number + " " + data.street + ", " + data.city;
+function displayResult(data, precision){
+    var notyf = new Notyf({
+        duration:4000,
+        ripple:true,
+        dismissible:true,
+        position:{x:'right',y:'top'}
+    });
+
+    if(data.house_number == null || data.street == null || data.city == null || precision > 500){
+        notyf.error('Localisation trop imprécise, veuillez la rentrer manuellement');
+    } else {
+        document.getElementById("coord").value = data.house_number + " " + data.street + ", " + data.city;
+    }
+
     document.getElementById("loadingButton").innerHTML = '<button class="btn btn-success" type="button" id="locate"><i class="bi bi-cursor"></i> Me localiser</button>';
     document.getElementById("locate").addEventListener("click", getGeoData);
 }
