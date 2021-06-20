@@ -28,5 +28,8 @@ class SettingsController extends Controller
     public function addUserPicture(Request $request){
         $data = $request->all();
         print_r($data);
+        DB::table('facialData')->where('uuid', session('userID'))->update(['picture' => $data['picture']]);
+        DB::table('facialData')->where('uuid', session('userID'))->update(['lastEdit' => date ('Y-m-d H:i:s', time())]);
+        return view('/settings', ['code' => 'pictureOK']);
     }
 }

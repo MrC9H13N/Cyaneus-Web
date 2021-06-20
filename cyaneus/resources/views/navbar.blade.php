@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/agenda"><i class="bi bi-calendar-event"></i> Agenda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-book"></i> Notes</a>
+                    <a class="nav-link" href="/notes"><i class="bi bi-book"></i> Notes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/settings"><i class="bi bi-gear"></i> Paramètres</a>

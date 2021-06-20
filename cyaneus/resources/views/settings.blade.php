@@ -85,20 +85,15 @@
                     <form name="changeParam whiteFormText" method="post" action="{{url('/changeParam')}}">
                         @csrf
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="lastNote" name="lastNote" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la dernière note</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="path" name="path" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage du trajet domicile-école</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="weather" name="weather" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage de la météo</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="class" name="class" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Affichage du prochain cours</label>
+                            @php
+                                $blur = DB::table('users')->where('uuid', session('userID'))->value('blur');
+                                if($blur == true){
+                                    echo '<input class="form-check-input" type="checkbox" id="lastNote" name="lastNote" checked>';
+                                } else {
+                                    echo '<input class="form-check-input" type="checkbox" id="lastNote" name="lastNote">';
+                                }
+                            @endphp
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Flouter la dernière note</label>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
@@ -112,6 +107,13 @@
                 <div class="card-header">Reconaissance faciale</div>
                 <div class="card-body text-dark" id="facialContainer">
                     <button type="submit" class="btn btn-success" id="facialParam"><i class="bi bi-camera"></i> <strong>Paramétrer la reconaissance faciale</strong></button>
+                    @php
+                    $lastEditImg = DB::table('facialData')->where('uuid', session('userID'))->value('lastEdit');
+                    if(!is_null($lastEditImg)){
+                        echo "<br><br><span class='whiteText'>Dernière modification le : ".$lastEditImg."</span>";
+                    }
+                    @endphp
+
                 </div>
             </div>
         </div>

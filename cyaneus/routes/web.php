@@ -23,6 +23,11 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return redirect('/');
 });
+
+Route::get('/notes', function () {
+    return view('notes');
+});
+
 Route::get('/create', function () {
     return redirect('/');
 });

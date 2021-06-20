@@ -1,5 +1,6 @@
 @include('master')
     <link rel="stylesheet" href="{{ asset('css/frs.css') }}">
+    <meta name="_token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <script src="{{ asset('js/frs.js') }}"></script>
     <title>Facial Recognition Setup</title>

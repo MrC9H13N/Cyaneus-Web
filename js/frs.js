@@ -14,6 +14,21 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     webcamElement.style.transform = "scale(-1,1)";
     document.getElementById("save").addEventListener("click", function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/addUserPicture", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('_token')[0].getAttribute('content'));
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+            if (this.status == 200) {
+                //console.log(this.responseText);
+                window.location.href = '/settings';
+            }
+        };
+
+        xhr.send(JSON.stringify({
+            picture: webcam.snap(),
+        }));
         console.log(webcam.snap());
     });
 });

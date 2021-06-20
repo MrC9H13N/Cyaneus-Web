@@ -12,6 +12,15 @@
     background-color: #565e6c;
 }
 
+#savedImg{
+    width: 100%;
+    height: 20vw;
+}
+
+.whiteText{
+    color:white !important;
+}
+
 label {
     color:white !important;
 }
