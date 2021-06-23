@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(out);
         }).catch(err => console.error(err));
 
+    document.getElementById("cours").innerHTML = closestTitle;
+    document.getElementById("prof").innerHTML = closest;
     //On change la couleur de la note
     document.getElementById("note").style.color = getBgColor(document.getElementById("note").innerHTML);
 

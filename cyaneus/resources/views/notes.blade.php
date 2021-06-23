@@ -1,4 +1,5 @@
 @include('master')
+<title>Notes</title>
 </head>
 <body>
 @include('navbar')

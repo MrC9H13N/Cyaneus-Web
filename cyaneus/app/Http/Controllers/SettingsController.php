@@ -72,12 +72,32 @@ class SettingsController extends Controller
         $data = $request->all();
         DB::table('facialData')->where('uuid', session('userID'))->update(['picture' => $data['picture']]);
         DB::table('facialData')->where('uuid', session('userID'))->update(['lastEdit' => date ('Y-m-d H:i:s', time())]);
+
+        $data = array(
+            'id' => session('userID'),
+            'image' => $data['picture'],
+            'action' => 1
+        );
+        $url = 'https://finch.hugoderave.fr/Cyaneus/cyaneus-interface.php';
+        $ch = curl_init($url);
+        $postString = http_build_query($data, '', '&');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        return $response;
+
         return view('/settings', ['code' => 'pictureOK']);
     }
 
     public function sendCropRequest(Request $request){
+        $data = $request->all();
         $data = array(
             'id' => session('userID'),
+            'image' => $data['picture'],
             'action' => 1
         );
         $url = 'https://finch.hugoderave.fr/Cyaneus/cyaneus-interface.php';

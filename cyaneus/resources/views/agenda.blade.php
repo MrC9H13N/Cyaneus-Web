@@ -1,5 +1,6 @@
 @include('master')
     <link rel="stylesheet" href="{{ asset('css/agenda.css') }}">
+    <script src="{{ asset('js/events.js') }}"></script>
     <script src="{{ asset('js/agenda.js') }}"></script>
     <link href="{{ asset('js/fullcalendar/main.css') }}" rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js'></script>

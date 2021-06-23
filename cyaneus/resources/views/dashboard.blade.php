@@ -1,10 +1,26 @@
 @include('master')
+    <script src="{{ asset('js/events.js') }}"></script>
     <script>
         //Valeurs à modifier en fonction de la BDD
         let home = "@php echo DB::table('users')->where('uuid', session('userID'))->value('adresse'); @endphp";
         let blur = "@php echo DB::table('users')->where('uuid', session('userID'))->value('blur'); @endphp";
         let school = [50.63415509710043, 3.0487966239874265];
+        var todayDate = new Date().toISOString().slice(0, 10);
+
+        const now = new Date();
+        let closest = Infinity;
+        let closestTitle;
+        events.forEach(function(d) {
+            const date = new Date(d.start);
+            if (date >= now && (date < new Date(closest) || date < closest)) {
+                closest = d.start;
+                closestTitle = d.title;
+            }
+        });
+
+        console.log(closest);
     </script>
+
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script type='text/javascript'
@@ -71,8 +87,8 @@
             <div class="card">
                 <div class="card-header">Prochain cours</div>
                 <div class="card-body">
-                    <h1 id="cours" class="center">Pentesting</h1>
-                    <h5 id="prof" class="center">Gabriel Chênevert - B802</h5>
+                    <h1 id="cours" class="center"></h1>
+                    <h5 id="prof" class="center"></h5>
                 </div>
             </div>
             <div class="card">
