@@ -55,29 +55,7 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card border-dark">
-                <div class="card-header">Localisation</div>
-                <div class="card-body text-dark">
-                    <p class="card-text">
-                    <form name="changeAdress whiteFormText" method="post" action="{{url('/changeAdress')}}">
-                        @csrf
-                        <label for="coord" class="form-label">Coordonnées</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="coord" name="coord">
-                            <div class="input-group-append" id="loadingButton">
-                                <button class="btn btn-success" type="button" id="locate"><i class="bi bi-cursor"></i> Me localiser</button>
-                            </div>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
-                    </form>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
+
             <div class="card border-dark">
                 <div class="card-header">Dashboard</div>
                 <div class="card-body text-dark">
@@ -101,25 +79,75 @@
                     </p>
                 </div>
             </div>
+
+            <div class="card border-dark">
+                <div class="card-header">Mes données</div>
+                <div class="card-body text-dark">
+                    <p class="card-text">
+                    <form name="changeParam whiteFormText " method="post" action="{{url('/downloadData')}}">
+                        @csrf
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn btn-info "><i class="bi bi-download"></i> <strong>Télécharger mes données</strong></button>
+                        </div>
+                    </form>
+                    <form name="changeParam whiteFormText" method="post" action="{{url('/deleteData')}}">
+                        @csrf
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> <strong>Supprimer mon compte et mes données</strong></button>
+                        </div>
+                    </form>
+
+                    </p>
+                </div>
+            </div>
+
         </div>
+<br>
+
         <div class="col">
+            <div class="card border-dark">
+                <div class="card-header">Localisation</div>
+                <div class="card-body text-dark">
+                    <p class="card-text">
+                    <form name="changeAdress whiteFormText" method="post" action="{{url('/changeAdress')}}">
+                        @csrf
+                        <label for="coord" class="form-label">Coordonnées</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="coord" name="coord">
+                            <div class="input-group-append" id="loadingButton">
+                                <button class="btn btn-success" type="button" id="locate"><i class="bi bi-cursor"></i> Me localiser</button>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+
             <div class="card border-dark">
                 <div class="card-header">Reconaissance faciale</div>
                 <div class="card-body text-dark" id="facialContainer">
                     <button type="submit" class="btn btn-success" id="facialParam"><i class="bi bi-camera"></i> <strong>Paramétrer la reconaissance faciale</strong></button>
                     @php
-                    $lastEditImg = DB::table('facialData')->where('uuid', session('userID'))->value('lastEdit');
-                    if(!is_null($lastEditImg)){
-                        echo "<br><br><span class='whiteText'>Dernière modification le : ".$lastEditImg."</span>";
-                    }
+                        $lastEditImg = DB::table('facialData')->where('uuid', session('userID'))->value('lastEdit');
+                        if(!is_null($lastEditImg)){
+                            echo "<br><br><span class='whiteText'>Dernière modification le : ".$lastEditImg."</span>";
+                        }
 
-                    $img = DB::table('facialData')->where('uuid', session('userID'))->value('picture');
-                    echo '<img id="savedImg" src="data:image/png;base64,'.str_replace("data:image/png;base64,","",$img).'"/>';
-                    @endphp
+                        $img = DB::table('facialData')->where('uuid', session('userID'))->value('picture');
+                        if($img!= ""){
+                           echo '<img id="savedImg" src="data:image/png;base64,'.str_replace("data:image/png;base64,","",$img).'"/>';
+                        }
+                        @endphp
 
                 </div>
             </div>
         </div>
+
+
+
+
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
@@ -136,7 +164,7 @@
         if(err === "passOK") notyf.success('Changement de mot passe réussi');
         if(err === "adressOK") notyf.success('Changement d\'adresse réussi');
         if(err === "passDiff") notyf.error('Mauvaise confirmation du mot de passe');
-        if(err === "pictureOK") notyf.success('Paramétrage de la reconaissance faciale réussie');
+        if(err === "paramOK") notyf.success('Paramètres sauvegardés avec succès');
     });
 </script>
 </body>

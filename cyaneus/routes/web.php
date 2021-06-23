@@ -54,6 +54,8 @@ Route::post('/changeAdress',[SettingsController::class, 'changeAdress']);
 Route::post('/addUserPicture',[SettingsController::class, 'addUserPicture']);
 Route::post('/sendCropRequest',[SettingsController::class, 'sendCropRequest']);
 Route::post('/changeParam',[SettingsController::class, 'changeParam']);
+Route::post('/downloadData',[SettingsController::class, 'downloadData']);
+Route::post('/deleteData',[SettingsController::class, 'deleteData']);
 
 Route::get('/contact', function () {
     return view('contact');

@@ -5,39 +5,42 @@ let jokesToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjE0Mzk2M
 
 function GetMap()
 {
-    var map = new Microsoft.Maps.Map('#myMap');
-    Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', function () {
-        var manager = new Microsoft.Maps.Traffic.TrafficManager(map);
-        manager.show();
-    });
-    map.setOptions({
-        showCopyright:false,
-        disableBirdseye : true,
-        disableStreetside: true,
-    });
+    if(home!= ""){
+        var map = new Microsoft.Maps.Map('#myMap');
+        Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', function () {
+            var manager = new Microsoft.Maps.Traffic.TrafficManager(map);
+            manager.show();
+        });
+        map.setOptions({
+            showCopyright:false,
+            disableBirdseye : true,
+            disableStreetside: true,
+        });
 
-    Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
-        var searchManager = new Microsoft.Maps.Search.SearchManager(map);
-        var requestOptions = {
-            bounds: map.getBounds(),
-            where: home,
-            callback: function (answer) {
-                let result = new Microsoft.Maps.Pushpin(answer.results[0].location);
-                Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-                    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-                    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Domicile', location: new Microsoft.Maps.Location(result.geometry.y, result.geometry.x) });
-                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'ISEN Lille', location: new Microsoft.Maps.Location(school[0], school[1]) });
-                    directionsManager.addWaypoint(waypoint1);
-                    directionsManager.addWaypoint(waypoint2);
-                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
-                    directionsManager.calculateDirections();
-                });
-            }
-        };
-        searchManager.geocode(requestOptions);
-    });
-
+        Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+            var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+            var requestOptions = {
+                bounds: map.getBounds(),
+                where: home,
+                callback: function (answer) {
+                    let result = new Microsoft.Maps.Pushpin(answer.results[0].location);
+                    Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+                        var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                        directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                        var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Domicile', location: new Microsoft.Maps.Location(result.geometry.y, result.geometry.x) });
+                        var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'ISEN Lille', location: new Microsoft.Maps.Location(school[0], school[1]) });
+                        directionsManager.addWaypoint(waypoint1);
+                        directionsManager.addWaypoint(waypoint2);
+                        directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                        directionsManager.calculateDirections();
+                    });
+                }
+            };
+            searchManager.geocode(requestOptions);
+        });
+    } else {
+        document.getElementById('myMap').innerHTML += "Le domicile n'a pas été défini dans les paramètres";
+    }
 }
 
 function getBgColor(note) {

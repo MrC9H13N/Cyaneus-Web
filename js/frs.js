@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
     webcam.start()
         .then(result =>{
-            console.log("webcam started");
         })
         .catch(err => {
             console.log(err);
@@ -21,14 +20,12 @@ document.addEventListener("DOMContentLoaded", function(){
         xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
             if (this.status == 200) {
-                //console.log(this.responseText);
-                //window.location.href = '/settings';
+                window.location.href = '/settings';
             }
         };
 
         xhr.send(JSON.stringify({
             picture: webcam.snap(),
         }));
-        console.log(webcam.snap());
     });
 });

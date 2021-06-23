@@ -25,16 +25,46 @@ class SettingsController extends Controller
         return view('/settings', ['code' => 'adressOK']);
     }
 
+    function array_to_csv_download($array, $filename = "export.csv", $delimiter=";") {
+        // open raw memory as file so no temp files needed, you might run out of memory though
+        $f = fopen('php://memory', 'w');
+        // loop over the input array
+        foreach ($array as $line) {
+            // generate csv lines from the inner arrays
+            fputcsv($f, $line, $delimiter);
+        }
+        // reset the file pointer to the start of the file
+        fseek($f, 0);
+        // tell the browser it's going to be a csv file
+        header('Content-Type: application/csv');
+        // tell the browser we want to save it instead of displaying it
+        header('Content-Disposition: attachment; filename="'.$filename.'";');
+        // make php send the generated csv lines to the browser
+        fpassthru($f);
+    }
+
+
+    public function downloadData(Request $request){
+        $usrData =  DB::table('users')->where('uuid', session('userID'))->get();
+        $usrData = json_decode(json_encode($usrData), true);
+        self::array_to_csv_download($usrData, session('userID').'.txt');
+    }
+
+    public function deleteData(Request $request){
+        DB::table('users')->where('uuid', session('userID'))->delete();
+        DB::table('facialData')->where('uuid', session('userID'))->delete();
+        session()->flush();
+        return redirect('/');
+    }
+
     public function changeParam(Request $request){
         $data = $request->all();
-        echo $data['lastNote'];
         if(isset($data['lastNote'])){
-            echo "OUI";
+            DB::table('users')->where('uuid', session('userID'))->update(['blur' => true]);
         } else {
-            echo "NON";
+            DB::table('users')->where('uuid', session('userID'))->update(['blur' => false]);
         }
-        //DB::table('users')->where('uuid', session('userID'))->update(['adresse' => $data['coord']]);
-        //return view('/settings', ['code' => 'paramOK']);
+        return view('/settings', ['code' => 'paramOK']);
     }
 
     public function addUserPicture(Request $request){

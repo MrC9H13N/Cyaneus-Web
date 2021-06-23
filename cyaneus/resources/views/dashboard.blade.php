@@ -2,6 +2,7 @@
     <script>
         //Valeurs à modifier en fonction de la BDD
         let home = "@php echo DB::table('users')->where('uuid', session('userID'))->value('adresse'); @endphp";
+        let blur = "@php echo DB::table('users')->where('uuid', session('userID'))->value('blur'); @endphp";
         let school = [50.63415509710043, 3.0487966239874265];
     </script>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -27,8 +28,10 @@
             $data_endpoint = json_decode(DB::table('users')->where('uuid', session('userID'))->value('notes'), true);
 
             $oldest_timestamp = 0;
-            $oldest_name = '';
-            $oldest_note = '';
+            $oldest_name = '/';
+            $oldest_note = '/';
+            if(!empty($data_endpoint)){
+
 
             foreach($data_endpoint as $a){
                if($oldest_timestamp < strtotime(substr($a['Date'],6,4)."-".substr($a['Date'],3,2)."-".substr($a['Date'],0,2))){
@@ -37,14 +40,23 @@
                     $oldest_note = $a['Note'];
                }
             }
+            } else {
+                $noNote = true;
+            }
         @endphp
         <div class="col">
             <div class="card">
                 <div class="card-header">Dernière note</div>
                 <div class="card-body">
-                    <h1 id="note" class="center"> {{ $oldest_note }}</h1>
-                    <h5 id="matiere" class="center">{{ $oldest_name }}</h5>
-                    <h5 id="date" class="center">{{ date('d/m/Y', $oldest_timestamp) }}</h5>
+                    @if(isset($noNote))
+                        <h1 id="note" class="center">Pas de notes</h1>
+                        <h5 id="matiere" class="center">Pas de notes</h5>
+                        <h5 id="date" class="center">Pas de notes</h5>
+                    @else
+                        <h1 id="note" class="center"> {{ $oldest_note }}</h1>
+                        <h5 id="matiere" class="center">{{ $oldest_name }}</h5>
+                        <h5 id="date" class="center">{{ date('d/m/Y', $oldest_timestamp) }}</h5>
+                    @endif
                 </div>
             </div>
             <div class="card">
@@ -66,14 +78,17 @@
             <div class="card">
                 <div class="card-header">Blague du jour</div>
                 <div class="card-body">
-                    <h5 id="blagueTEMP" class="center">Quelles sont les deux sœurs qui ont la meilleure vue ?</h5>
-                    <h5 id="reponseTEMP" class="center">Les sœurs jumelles.</h5>
+                    <h5 id="blague" class="center">Quelles sont les deux sœurs qui ont la meilleure vue ?</h5>
+                    <h5 id="reponse" class="center">Les sœurs jumelles.</h5>
                 </div>
             </div>
         </div>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
+    if(blur == 1){
+        document.getElementById("note").style.filter = "blur(1.5vw)";
+    }
     var notyf = new Notyf({
         duration:10000,
         ripple:true,

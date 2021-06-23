@@ -88,6 +88,11 @@ class UserController extends Controller
             'prenom' => $prenom,
             'pass' => Hash::make($pass)
         ]);
+        DB::table('facialData')->insert([
+            'uuid' => $uuidV4,
+            'picture' => null,
+            'lastEdit' => null
+        ]);
         session(['userName' => $prenom]);
         session(['userID' => $uuidV4]);
         return redirect('dashboard');
