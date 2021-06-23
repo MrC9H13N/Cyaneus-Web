@@ -15,20 +15,26 @@ document.addEventListener("DOMContentLoaded", function(){
     webcamElement.style.transform = "scale(-1,1)";
     document.getElementById("save").addEventListener("click", function(){
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/addUserPicture", true);
+        xhr.open("POST", "/connectUserWithPicture", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('_token')[0].getAttribute('content'));
         xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
             if (this.status == 200) {
-                //console.log(this.responseText);
-                //window.location.href = '/settings';
+                console.log(this.responseText);
+                if(this.responseText.includes("AuthenticationSucceed")){
+                    window.location.href = '/dashboard';
+                } else {
+                    window.location.href = '/logout';
+                }
+
             }
         };
 
         xhr.send(JSON.stringify({
             picture: webcam.snap(),
+            mail : document.getElementById('mail').value
         }));
-        console.log(webcam.snap());
+        //console.log(webcam.snap());
     });
 });

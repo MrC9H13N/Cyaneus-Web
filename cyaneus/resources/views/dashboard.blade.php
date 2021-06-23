@@ -23,13 +23,28 @@
                 </div>
             </div>
         </div>
+        @php
+            $data_endpoint = json_decode(DB::table('users')->where('uuid', session('userID'))->value('notes'), true);
+
+            $oldest_timestamp = 0;
+            $oldest_name = '';
+            $oldest_note = '';
+
+            foreach($data_endpoint as $a){
+               if($oldest_timestamp < strtotime(substr($a['Date'],6,4)."-".substr($a['Date'],3,2)."-".substr($a['Date'],0,2))){
+                    $oldest_timestamp = strtotime(substr($a['Date'],6,4)."-".substr($a['Date'],3,2)."-".substr($a['Date'],0,2));
+                    $oldest_name = $a['Nom'];
+                    $oldest_note = $a['Note'];
+               }
+            }
+        @endphp
         <div class="col">
             <div class="card">
                 <div class="card-header">Dernière note</div>
                 <div class="card-body">
-                    <h1 id="note" class="center">17</h1>
-                    <h5 id="matiere" class="center">Electronique numérique</h5>
-                    <h5 id="date" class="center">02/05/2021</h5>
+                    <h1 id="note" class="center"> {{ $oldest_note }}</h1>
+                    <h5 id="matiere" class="center">{{ $oldest_name }}</h5>
+                    <h5 id="date" class="center">{{ date('d/m/Y', $oldest_timestamp) }}</h5>
                 </div>
             </div>
             <div class="card">

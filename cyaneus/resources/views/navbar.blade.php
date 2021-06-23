@@ -2,6 +2,10 @@
     <script>window.location = "/";</script>
 @endif
 
+@php
+    echo '<div id="linker_token" style="display: none;">'.session('userID').'</div>';
+@endphp
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{Request::root()}}">

@@ -112,6 +112,9 @@
                     if(!is_null($lastEditImg)){
                         echo "<br><br><span class='whiteText'>Dernière modification le : ".$lastEditImg."</span>";
                     }
+
+                    $img = DB::table('facialData')->where('uuid', session('userID'))->value('picture');
+                    echo '<img id="savedImg" src="data:image/png;base64,'.str_replace("data:image/png;base64,","",$img).'"/>';
                     @endphp
 
                 </div>
@@ -129,9 +132,11 @@
             position:{x:'right',y:'top'}
         });
         let err = "{!! $code ?? '' !!}";
+        console.log(err);
         if(err === "passOK") notyf.success('Changement de mot passe réussi');
         if(err === "adressOK") notyf.success('Changement d\'adresse réussi');
         if(err === "passDiff") notyf.error('Mauvaise confirmation du mot de passe');
+        if(err === "pictureOK") notyf.success('Paramétrage de la reconaissance faciale réussie');
     });
 </script>
 </body>

@@ -1,0 +1,13 @@
+.videocard {
+    width: 80%;
+}
+
+.card, .card-text, .card-title{
+    margin-top: 3vw;
+    color:white !important;
+    background-color: #565e6c;
+}
+
+.card-footer{
+    color:white !important;
+}

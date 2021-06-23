@@ -35,6 +35,7 @@ Route::get('/create', function () {
 Route::post('/login',[UserController::class, 'login']);
 Route::post('/create',[UserController::class, 'create']);
 Route::post('/logout',[UserController::class, 'logout']);
+Route::get('/logout',[UserController::class, 'logout']);
 
 Route::get('/agenda', function () {
     return view('agenda');
@@ -51,6 +52,8 @@ Route::get('/settings', function () {
 Route::post('/changePassword',[SettingsController::class, 'changePassword']);
 Route::post('/changeAdress',[SettingsController::class, 'changeAdress']);
 Route::post('/addUserPicture',[SettingsController::class, 'addUserPicture']);
+Route::post('/sendCropRequest',[SettingsController::class, 'sendCropRequest']);
+Route::post('/changeParam',[SettingsController::class, 'changeParam']);
 
 Route::get('/contact', function () {
     return view('contact');
@@ -59,3 +62,9 @@ Route::get('/contact', function () {
 Route::get('/frs', function () { //Facial recognition setup
     return view('frs');
 });
+
+Route::get('/frl', function () { //Facial recognition login
+    return view('frl');
+});
+
+Route::post('/connectUserWithPicture',[UserController::class, 'connectUserWithPicture']);

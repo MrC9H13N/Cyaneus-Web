@@ -93,6 +93,48 @@ class UserController extends Controller
         return redirect('dashboard');
     }
 
+    public function connectUserWithPicture(Request $request){
+
+        $data = $request->all();
+        $mail = explode(".", $data['mail']);
+        if(!isset($mail[0]) || !isset($mail[1])){ //Syntaxe du mail incorrecte
+            return("erreur");
+        }
+        $prenom = ucfirst(strtolower($mail[0]));
+        $nom = ucfirst(strtolower($mail[1]));
+
+        $id = DB::table('users')
+            ->where('prenom', '=', $prenom)
+            ->where('nom', '=', $nom)
+            ->value('uuid');
+
+        $data = array(
+            'id' => $id,
+            'image' => $data['picture'],
+            'action' => 2
+        );
+        $url = 'https://finch.hugoderave.fr/Cyaneus/cyaneus-interface.php';
+        $ch = curl_init($url);
+        $postString = http_build_query($data, '', '&');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+        //Connect user
+        $users = DB::table('users')->get();
+        foreach ($users as $u) {
+            if($u->nom == $nom && $u->prenom == $prenom){ //User connecté
+                session(['userName' => $u->prenom]);
+                session(['userID' => $u->uuid]);
+            }
+        }
+
+
+        return $response;
+    }
+
     public function logout(){
         session()->flush();
         return redirect('/');

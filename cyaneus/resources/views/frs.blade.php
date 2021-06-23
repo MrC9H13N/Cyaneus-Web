@@ -22,5 +22,7 @@
         </div>
     </div>
 
+    <div id="postContainer"></div>
+
 </body>
 </html>

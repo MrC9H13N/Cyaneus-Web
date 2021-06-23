@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(){
         main = false;
     };
     document.getElementById("facialConnect").onclick = function(){
-        alert("Reconaissance faciale");
+        window.location.href = "/frl";
     };
 });
 window.history.replaceState("a", "Accueil", "/");
