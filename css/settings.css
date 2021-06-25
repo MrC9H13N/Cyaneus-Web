@@ -25,6 +25,6 @@ label {
     color:white !important;
 }
 
-#facialContainer {
+#facialContainer, #tokenContainer {
     text-align: center;
 }

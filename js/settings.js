@@ -62,6 +62,7 @@ function getGeoData (){
     }
 }
 
+//Affiche le résultat de la géolocation si le résultat est assez précis
 function displayResult(data, precision){
     var notyf = new Notyf({
         duration:4000,

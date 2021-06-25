@@ -1,5 +1,5 @@
+//Permet de charger le calendrier et ses paramètres
 document.addEventListener('DOMContentLoaded', function() {
-    //FullCalendar library - https://fullcalendar.io/
     let calendarEl = document.getElementById('calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',

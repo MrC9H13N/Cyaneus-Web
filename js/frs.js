@@ -1,5 +1,6 @@
 let webcam;
 
+//Initialisation de la webcam
 document.addEventListener("DOMContentLoaded", function(){
     const webcamElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('canvas');
@@ -13,6 +14,11 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     webcamElement.style.transform = "scale(-1,1)";
     document.getElementById("save").addEventListener("click", function(){
+        document.getElementById("buttonDiv").innerHTML = '<button class="btn btn-primary" type="button" disabled>\n' +
+            '                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+            '                                    Chargement ...\n' +
+            '                                </button>';
+        //On envoie la requête de d'enregistrement
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/addUserPicture", true);
         xhr.setRequestHeader('Content-Type', 'application/json');

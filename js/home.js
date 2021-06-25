@@ -1,4 +1,4 @@
-//S'éxécute après le chargement de la page
+//S'éxécute après le chargement de la page eet permet l'affichage des div de connexion et de création de compte
 document.addEventListener("DOMContentLoaded", function(){
     let main = true;
 

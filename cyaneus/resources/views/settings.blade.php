@@ -134,13 +134,14 @@
                         if(!is_null($lastEditImg)){
                             echo "<br><br><span class='whiteText'>Dernière modification le : ".$lastEditImg."</span>";
                         }
+                    @endphp
 
-                        $img = DB::table('facialData')->where('uuid', session('userID'))->value('picture');
-                        if($img!= ""){
-                           echo '<img id="savedImg" src="data:image/png;base64,'.str_replace("data:image/png;base64,","",$img).'"/>';
-                        }
-                        @endphp
-
+                </div>
+            </div>
+            <div class="card border-dark">
+                <div class="card-header">Token extension Chrome</div>
+                <div class="card-body text-dark whiteText" id="tokenContainer">
+                    @php echo session('userID'); @endphp
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 let webcam;
 
+//Initialisation de la webcam
 document.addEventListener("DOMContentLoaded", function(){
     const webcamElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('canvas');
@@ -14,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     webcamElement.style.transform = "scale(-1,1)";
     document.getElementById("save").addEventListener("click", function(){
+        document.getElementById("buttonDiv").innerHTML = '<button class="btn btn-primary" type="button" disabled>\n' +
+            '                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+            '                                    Chargement ...\n' +
+            '                                </button>';
+        //On envoie la requête de connexion
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/connectUserWithPicture", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -22,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(){
             if (this.readyState != 4) return;
             if (this.status == 200) {
                 console.log(this.responseText);
-                if(this.responseText.includes("AuthenticationSucceed")){
+                if(this.responseText.includes("AuthenticationSuccessful")){
                     window.location.href = '/dashboard';
                 } else {
                     window.location.href = '/logout';
@@ -34,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function(){
         xhr.send(JSON.stringify({
             picture: webcam.snap(),
             mail : document.getElementById('mail').value
-        }));
-        //console.log(webcam.snap());
+        }));;
     });
 });

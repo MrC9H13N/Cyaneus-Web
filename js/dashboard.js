@@ -1,8 +1,6 @@
-//API Bings Map - https://www.bingmapsportal.com/
 let jokesToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjE0Mzk2MDUyMDg0NzUyMzg1IiwibGltaXQiOjEwMCwia2V5IjoicnozWURBN2ZMSEdYVFBrSVpGbHY2Y1YyMUlSdGFFeFJ6VUlaeTM0SUVXdjdMcTdVZWYiLCJjcmVhdGVkX2F0IjoiMjAyMS0wNS0yM1QwODoyMTozOSswMDowMCIsImlhdCI6MTYyMTc1ODA5OX0.IyBA-DfzaX3gLkqEmn7IfTZhG_5XJliNDFAU0Wr0RNQ";
 
-
-
+//Permet l'affichage de la carte sur le dashboard
 function GetMap()
 {
     if(home!= ""){
@@ -43,6 +41,7 @@ function GetMap()
     }
 }
 
+//Renvoie une couleur en fonction de la note (rouge = mauvais, vert = bon)
 function getBgColor(note) {
     var n;
     n = Math.round(Math.ceil(note));
@@ -78,9 +77,8 @@ function getBgColor(note) {
     return "#" + r;
 }
 
+//Au chargement de la page envoie une requête à l'API de météo nord pas de calais
 document.addEventListener('DOMContentLoaded', function() {
-
-    //On envoie la requête pour la météo
     let date = new Date();
     date = date.toISOString().slice(0, 10)+("0" + date.getHours()).slice(-2);
     date = date.replaceAll("-", "");

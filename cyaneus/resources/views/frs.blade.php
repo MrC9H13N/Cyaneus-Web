@@ -15,8 +15,10 @@
             <video id="webcam" autoplay playsinline width="640" height="480"></video>
             <canvas id="canvas" class="d-none"></canvas>
             <br>
-            <button type="submit" class="btn btn-primary" id="save"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
-        </div>
+            <div id="buttonDiv">
+                <button type="submit" class="btn btn-primary" id="save"><i class="bi bi-save"></i> <strong>Enregistrer</strong></button>
+            </div>
+            </div>
         <div class="card-footer text-muted">
             Votre visage doit être visible de face et dans son intégralité. Il ne doit y avoir qu'un seul visage.
         </div>

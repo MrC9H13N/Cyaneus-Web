@@ -1,3 +1,4 @@
+//Liste des cours (sert ici pour montrer que le site fonctionne mais devrait être relié à l'interface d'administration)
 let events = [
     {
         title: 'Cours d\'automatique',

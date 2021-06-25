@@ -10,6 +10,7 @@ use App\Models\User;
 
 class SettingsController extends Controller
 {
+    //Change le mot de passe en BDD
     public function changePassword(Request $request){
         $data = $request->all();
         if($data['newPassword'] != $data['newPasswordConfirm']){
@@ -19,37 +20,33 @@ class SettingsController extends Controller
         return view('/settings', ['code' => 'passOK']);
     }
 
+    //Change l'adresse en BDD
     public function changeAdress(Request $request){
         $data = $request->all();
         DB::table('users')->where('uuid', session('userID'))->update(['adresse' => $data['coord']]);
         return view('/settings', ['code' => 'adressOK']);
     }
 
+    //Transforme la sortie de la BDD en fichier téléchargeable
     function array_to_csv_download($array, $filename = "export.csv", $delimiter=";") {
-        // open raw memory as file so no temp files needed, you might run out of memory though
         $f = fopen('php://memory', 'w');
-        // loop over the input array
         foreach ($array as $line) {
-            // generate csv lines from the inner arrays
             fputcsv($f, $line, $delimiter);
         }
-        // reset the file pointer to the start of the file
         fseek($f, 0);
-        // tell the browser it's going to be a csv file
         header('Content-Type: application/csv');
-        // tell the browser we want to save it instead of displaying it
         header('Content-Disposition: attachment; filename="'.$filename.'";');
-        // make php send the generated csv lines to the browser
         fpassthru($f);
     }
 
-
+    //Permet à l'utilisateur de télécharger ses données
     public function downloadData(Request $request){
         $usrData =  DB::table('users')->where('uuid', session('userID'))->get();
         $usrData = json_decode(json_encode($usrData), true);
         self::array_to_csv_download($usrData, session('userID').'.txt');
     }
 
+    //Permet à l'utilisateur de supprimer ses données et son compte en BDD
     public function deleteData(Request $request){
         DB::table('users')->where('uuid', session('userID'))->delete();
         DB::table('facialData')->where('uuid', session('userID'))->delete();
@@ -57,6 +54,7 @@ class SettingsController extends Controller
         return redirect('/');
     }
 
+    //Modifie l'affichage flou ou non de ses notes
     public function changeParam(Request $request){
         $data = $request->all();
         if(isset($data['lastNote'])){
@@ -67,6 +65,7 @@ class SettingsController extends Controller
         return view('/settings', ['code' => 'paramOK']);
     }
 
+    //Ajoute une photo de l'utilisateur en BDD pour la reconaissance faciale
     public function addUserPicture(Request $request){
         date_default_timezone_set('Europe/Paris');
         $data = $request->all();
@@ -91,25 +90,5 @@ class SettingsController extends Controller
         return $response;
 
         return view('/settings', ['code' => 'pictureOK']);
-    }
-
-    public function sendCropRequest(Request $request){
-        $data = $request->all();
-        $data = array(
-            'id' => session('userID'),
-            'image' => $data['picture'],
-            'action' => 1
-        );
-        $url = 'https://finch.hugoderave.fr/Cyaneus/cyaneus-interface.php';
-        $ch = curl_init($url);
-        $postString = http_build_query($data, '', '&');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-
-        curl_close($ch);
-
-        return $response;
     }
 }

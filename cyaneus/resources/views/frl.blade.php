@@ -19,8 +19,10 @@
             <input type="text" class="form-control" id="mail" name="mail" aria-describedby="addonConnect">
             <span class="input-group-text" id="addonConnect">@student.junia.com</span>
         </div>
-        <button type="submit" class="btn btn-primary" id="save"><i class="bi bi-camera"></i> <strong>Me connecter</strong></button>
-    </div>
+        <div id="buttonDiv">
+            <button type="submit" class="btn btn-primary" id="save"><i class="bi bi-camera"></i> <strong>Me connecter</strong></button>
+        </div>
+         </div>
     <div class="card-footer text-muted">
         Votre visage doit être visible de face et dans son intégralité. Il ne doit y avoir qu'un seul visage.
     </div>
